@@ -51,13 +51,44 @@ For most of the Arduino projects, this sensor is used to detect proximity or to 
 
 This sensor has three pins two of which are power pins leveled VCC and GND and the other one is the sense/data pin which is shown in the diagram above. It has an onboard power LED and a signal LED the power LED turns on when power is applied to the board the signal LED turns on when the circuit is triggered. This board also has a comparator Op-amp that is responsible for converting the incoming analog signal from the photodiode to a digital signal. We also have a sensitivity adjustment potentiometer; with that, we can adjust the sensitivity of the device. Last and finally, we have the photodiode and the IR emitting LED pair which all together make the total IR Proximity Sensor Module.
 
-
-
 ## PROGRAM:
+```c
+#define IR_sensor 8
+#define LED 13
+int IR_value;
+void setup ()
+{
+  pinMode (IR_sensor, INPUT);
+  pinMode (LED, OUTPUT);
+  Serial. begin (9600) ;
+}
+void loop ()
+{
+  IR_value=digitalRead (IR_sensor);
+  if (IR_value==0)
+  {
+    digitalWrite (LED, HIGH);
+    Serial.print ("\nSensor Value: ");
+    Serial.print (IR_value);
+    Serial.println("Person Detected: ");
+    delay (1000);
+  }
+else
+{ 
+  digitalWrite(LED, LOW);
 
+  Serial.print("\nSensor Value: ");
+
+  Serial.print(IR_value);
+
+  Serial.println("Person Not Detected: "); delay(1000);
+ }
+}
+```
 ## CIRCUIT DIAGRAM:
-
+![](PIOT_EX05-1.jpeg)
 ## OUTPUT:
-
+![](PIOT_EX05-2.jpeg)
+![](PIOT_EX05-3.jpeg)
 ## RESULT:
 Thus the IR sensor module is interfaced with Arduino UNO controller and output is verified.
